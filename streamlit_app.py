@@ -1,5 +1,6 @@
 import pandas
 import streamlit
+import requests
 
 my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
 # adding fruit index
@@ -24,3 +25,8 @@ fruits_to_show = my_fruit_list.loc[fruit_selected]
 # Display the table on the page.
 # streamlit.dataframe(my_fruit_list)
 streamlit.dataframe(fruits_to_show)
+
+# New Section to display fruityvice api response
+streamlit.header('Fruityice Fruit Advice!')
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+streamlit.text(fruityvice_response.json())
